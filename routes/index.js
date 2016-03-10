@@ -5,6 +5,10 @@ var UserModel = require('../models/usermodel');
 var PostModel = require('../models/postmodel');
 
 /* GET home page. */
+router.get('/socket', function(req, res) {
+  res.sendFile(__dirname + '/socket.html');
+})
+
 router.get('/', function(req, res, next) {
   PostModel.find(null,function(err,posts) {
     console.log("posts: " + posts[0] + posts[1]);

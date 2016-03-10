@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('myblogejs:server');
 var http = require('http');
+//HTTP_Parsereq.headers
+
+
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +24,13 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('connect to socket');
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
